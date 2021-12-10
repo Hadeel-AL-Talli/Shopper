@@ -4,6 +4,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:shopper_project2/widget/custom_button.dart';
 import 'package:shopper_project2/widget/on_boarding_content.dart';
 import 'package:shopper_project2/widget/onboarding_indicator.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OnBoarding extends StatefulWidget {
   const OnBoarding({Key? key}) : super(key: key);
@@ -42,22 +43,22 @@ class _OnBoardingState extends State<OnBoarding> {
                    Navigator.pushReplacementNamed(context, '/welcome_screen');
                  },
                  child: Text('Start',
-                     style: TextStyle(fontSize: 18, color: Colors.black , fontFamily: 'Poppins', fontWeight: FontWeight.w600)),
+                     style: TextStyle(fontSize: 18.sp, color: Colors.black , fontFamily: 'Poppins', fontWeight: FontWeight.w600)),
                ),
                child: TextButton(
                  onPressed: () => _pageController.animateToPage(2,
                      duration: Duration(seconds: 1), curve: Curves.easeInOut),
                  child: Text('Skip',
-                     style: TextStyle(fontSize: 18,fontFamily: 'Poppins', color: HexColor("#07BFA5"))),
+                     style: TextStyle(fontSize: 18.sp,fontFamily: 'Poppins', color: HexColor("#07BFA5"))),
                ),
              ),
            ),
            ConstrainedBox(
-             constraints:const BoxConstraints(
-               minWidth: 0,
+             constraints: BoxConstraints(
+               minWidth: 0.w,
                maxWidth: double.infinity,
-               minHeight: 50,
-               maxHeight: 580
+               minHeight: 50.h,
+               maxHeight: 580.h
              ),
              child: PageView(
                controller: _pageController,
@@ -105,7 +106,7 @@ class _OnBoardingState extends State<OnBoarding> {
                ),
              ],
            ),
-          const SizedBox(height: 20,),
+           SizedBox(height: 20.h,),
            Row(
              mainAxisAlignment: MainAxisAlignment.center,
              children: [

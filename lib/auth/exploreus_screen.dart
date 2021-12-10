@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shopper_project2/widget/custom_button.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class Explore extends StatelessWidget {
   const Explore({Key? key}) : super(key: key);
 
@@ -10,32 +10,40 @@ class Explore extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
 
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            body: Stack(
+
               children: [
-                SizedBox(height: 30,),
+                Image.asset('images/Pattern.png'),
+                SizedBox(height: 30.h,),
                 Center(child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset('images/Logo.png', width: 40,),
-                    SizedBox(width: 12,),
+                    Image.asset('images/Logo.png', width: 40.w,),
+                    SizedBox(width: 12.w,),
                     Text('Shop',
                         style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
-                            fontSize: 40,
+                            fontSize: 40.sp,
                             fontFamily: 'Poppins')),
                     Text('per',
                         style: TextStyle(
                             color: HexColor("#07BFA5"),
                             fontWeight: FontWeight.bold,
-                            fontSize: 40,
+                            fontSize: 40.sp,
                             fontFamily: 'Poppins')),
                   ],
                 ),),
-                CustomButton(onPress: (){
-                  Navigator.pushNamed(context, '/OnBoarding');
-                }, text: 'Explore Us', color: Colors.black)
+                Column(
+
+                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(),
+                    CustomButton(onPress: (){
+                      Navigator.pushNamed(context, '/OnBoarding');
+                    }, text: 'Explore Us', color: Colors.black),
+                  ]
+                )
               ],
             )
     );

@@ -2,9 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:shopper_project2/api/api_helper.dart';
+import 'package:shopper_project2/api/controller/auth_api_controller.dart';
+import 'package:shopper_project2/auth/resetpassword_screen.dart';
+import 'package:shopper_project2/helpers/helpers.dart';
 import 'package:shopper_project2/widget/custom_button.dart';
 import 'package:shopper_project2/widget/custom_text_feild.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({Key? key}) : super(key: key);
 
@@ -12,9 +16,9 @@ class ForgetPassword extends StatefulWidget {
   _ForgetPasswordState createState() => _ForgetPasswordState();
 }
 
-class _ForgetPasswordState extends State<ForgetPassword> {
+class _ForgetPasswordState extends State<ForgetPassword> with ApiHelper {
   late TextEditingController _phoneTextEditingController;
-
+  String? _code;
 
   @override
   void initState() {
@@ -29,7 +33,6 @@ class _ForgetPasswordState extends State<ForgetPassword> {
     // TODO: implement dispose
     super.dispose();
     _phoneTextEditingController.dispose();
-
   }
 
   @override
@@ -40,31 +43,31 @@ class _ForgetPasswordState extends State<ForgetPassword> {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: SafeArea(child: Column(children: [
-          const  SizedBox(height: 20,),
+           SizedBox(height: 20.h,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('images/Logo.png',width: 40,),
-              const SizedBox(width:12),
-              const  Text('Shop',
+              Image.asset('images/Logo.png', width: 40.w,),
+               SizedBox(width: 12.w),
+               Text('Shop',
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 40,
+                      fontSize: 40.sp,
                       fontFamily: 'Poppins')),
               Text('per',
                   style: TextStyle(
                       color: HexColor("#07BFA5"),
                       fontWeight: FontWeight.bold,
-                      fontSize: 40,
+                      fontSize: 40.sp,
                       fontFamily: 'Poppins')),
             ],
           ),
-          const SizedBox(height: 50,),
+           SizedBox(height: 50.h,),
           Container(
             margin: const EdgeInsets.all(20.0),
-            height: 500,
-            width: 500,
+            height: 500.h,
+            width: 500.w,
             decoration: BoxDecoration(
 
                 color: Colors.white, borderRadius: BorderRadius.circular(20)),
@@ -74,41 +77,44 @@ class _ForgetPasswordState extends State<ForgetPassword> {
 
                 //mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 20,),
+                   SizedBox(height: 20.h,),
 
                   Row(
 
                     children: [
                       GestureDetector(
-                        onTap:(){
-                           Navigator.pop(context);
-            },
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
                           child: Icon(Icons.arrow_back_ios)),
-                         SizedBox(width: 20,),
-                      const  Text('Forget Password ' , style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold,fontFamily: 'Poppins'),),
+                      SizedBox(width: 20.w,),
+                       Text('Forget Password ', style: TextStyle(
+                          fontSize: 22.sp,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins'),),
                     ],
                   ),
-                  const SizedBox(height: 10,),
-                  const Padding(
+                   SizedBox(height: 10.h,),
+                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
                         'Please enter your phone number, we will send an verify code.',
 
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontFamily: 'Poppins', color: Colors.grey, fontSize: 14)),
+                            fontFamily: 'Poppins',
+                            color: Colors.grey,
+                            fontSize: 14.sp)),
                   ),
-                  const SizedBox(height: 50,),
-                  AppTextField(hint: 'Phone number', controller: _phoneTextEditingController, prefixIcon: Icons.email,keyboardType: TextInputType.phone, ),
-                  const SizedBox(height: 50,),
+                   SizedBox(height: 50.h,),
+                  AppTextField(hint: 'Phone number',
+                    controller: _phoneTextEditingController,
+                    prefixIcon: Icons.phone,
+                    keyboardType: TextInputType.phone,),
+                   SizedBox(height: 50.h,),
 
 
-
-                  CustomButton(onPress: (){
-                      //TODO:send verification code to phone number
-                    Navigator.pushNamed(context, '/Verify_screen');
-                  }, text: ' Verify', color: HexColor("#07BFA5")),
-
+                  CustomButton(onPress: () async => await performForgetPassword(), text: ' Send', color: HexColor("#07BFA5")),
 
 
                 ],),
@@ -117,5 +123,45 @@ class _ForgetPasswordState extends State<ForgetPassword> {
         ],)),
       ),
     );
+
+
+
   }
+
+  Future<void> performForgetPassword() async {
+    if (checkData()) {
+      await forgetPassword();
+    }
+  }
+
+  bool checkData() {
+    if (_phoneTextEditingController.text.isNotEmpty) {
+      return true;
+    }
+    showSnackBar(
+      context,
+      message: 'Enter required data!',
+      error: true,
+    );
+    return false;
+  }
+
+  Future<void> forgetPassword() async {
+    bool status = await AuthApiController().forgetPassword(
+      context,
+      phone: _phoneTextEditingController.text,
+    );
+    // if (status) Navigator.pushReplacementNamed(context, '/reset_password_screen');
+    if (status) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              ResetPassword(phone: _phoneTextEditingController.text),
+        ),
+      );
+    }
+  }
+
+
 }

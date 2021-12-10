@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class OnBoardingIndicator extends StatelessWidget {
   final double marginEnd;
   final bool selected;
@@ -12,8 +12,8 @@ class OnBoardingIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 20,
-      height: 10,
+      width: 20.w,
+      height: 10.h,
       decoration: BoxDecoration(
         color: selected ? Colors.black : Colors.grey,
         borderRadius: BorderRadius.circular(10),

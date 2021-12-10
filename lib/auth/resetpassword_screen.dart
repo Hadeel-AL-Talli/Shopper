@@ -2,28 +2,35 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:shopper_project2/api/api_helper.dart';
+import 'package:shopper_project2/api/controller/auth_api_controller.dart';
 import 'package:shopper_project2/widget/code_text_feild.dart';
 import 'package:shopper_project2/widget/custom_button.dart';
 import 'package:shopper_project2/widget/custom_text_feild.dart';
-
-class Verify extends StatefulWidget {
-  const Verify({Key? key}) : super(key: key);
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+class ResetPassword extends StatefulWidget {
+  const ResetPassword({Key? key , required this.phone}) : super(key: key);
+ final String phone;
 
   @override
-  _VerifyState createState() => _VerifyState();
+  _ResetPasswordState createState() => _ResetPasswordState();
 }
 
-class _VerifyState extends State<Verify> {
+class _ResetPasswordState extends State<ResetPassword> with ApiHelper {
 
   late TextEditingController _firstCodeTextController;
   late TextEditingController _secondCodeTextController;
   late TextEditingController _thirdCodeTextController;
   late TextEditingController _fourthCodeTextController;
+  late TextEditingController _password;
+  late TextEditingController _confirmPassword;
 
   late FocusNode _firstFocusNode;
   late FocusNode _secondFocusNode;
   late FocusNode _thirdFocusNode;
   late FocusNode _fourthFocusNode;
+
+  String? _code;
 
   @override
   void initState() {
@@ -33,6 +40,8 @@ class _VerifyState extends State<Verify> {
     _secondCodeTextController = TextEditingController();
     _thirdCodeTextController = TextEditingController();
     _fourthCodeTextController = TextEditingController();
+    _password = TextEditingController();
+    _confirmPassword = TextEditingController();
 
     _firstFocusNode = FocusNode();
     _secondFocusNode = FocusNode();
@@ -50,11 +59,14 @@ class _VerifyState extends State<Verify> {
     _secondCodeTextController.dispose();
     _thirdCodeTextController.dispose();
     _fourthCodeTextController.dispose();
+    _password.dispose();
+    _confirmPassword.dispose();
 
     _firstFocusNode.dispose();
     _secondFocusNode.dispose();
     _thirdFocusNode.dispose();
     _fourthFocusNode.dispose();
+    String? code;
 
   }
 
@@ -66,31 +78,31 @@ class _VerifyState extends State<Verify> {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: SafeArea(child: Column(children: [
-          const  SizedBox(height: 20,),
+            SizedBox(height: 20.h,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('images/Logo.png',width: 40,),
-              const SizedBox(width:12),
-              const  Text('Shop',
+              Image.asset('images/Logo.png',width: 40.w,),
+               SizedBox(width:12.w),
+                Text('Shop',
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 40,
+                      fontSize: 40.sp,
                       fontFamily: 'Poppins')),
               Text('per',
                   style: TextStyle(
                       color: HexColor("#07BFA5"),
                       fontWeight: FontWeight.bold,
-                      fontSize: 40,
+                      fontSize: 40.sp,
                       fontFamily: 'Poppins')),
             ],
           ),
-          const SizedBox(height: 50,),
+           SizedBox(height: 50.h,),
           Container(
             margin: const EdgeInsets.all(20.0),
-            height: 500,
-            width: 500,
+            height: 500.h,
+            width: 500.w,
             decoration: BoxDecoration(
 
                 color: Colors.white, borderRadius: BorderRadius.circular(20)),
@@ -100,7 +112,7 @@ class _VerifyState extends State<Verify> {
 
                 //mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 20,),
+                   SizedBox(height: 20.h,),
 
                   Row(
 
@@ -110,12 +122,12 @@ class _VerifyState extends State<Verify> {
                             Navigator.pop(context);
                           },
                           child: Icon(Icons.arrow_back_ios)),
-                      SizedBox(width: 20,),
-                      const  Text('Verify Code' , style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold,fontFamily: 'Poppins'),),
+                      SizedBox(width: 20.w,),
+                        Text('Reset Password' , style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold,fontFamily: 'Poppins'),),
                     ],
                   ),
-                  const SizedBox(height: 10,),
-                  const Padding(
+                   SizedBox(height: 10.h,),
+                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
                         'Please enter verify code that we’ve sent to your phone number.',
@@ -123,9 +135,9 @@ class _VerifyState extends State<Verify> {
 
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontFamily: 'Poppins', color: Colors.grey, fontSize: 14)),
+                            fontFamily: 'Poppins', color: Colors.grey, fontSize: 14.sp)),
                   ),
-                  const SizedBox(height: 50,),
+                   SizedBox(height: 20.h,),
                   Row(
                     children: [
                       Expanded(
@@ -139,7 +151,7 @@ class _VerifyState extends State<Verify> {
                           },
                         ),
                       ),
-                      const SizedBox(width: 10),
+                       SizedBox(width: 10.w),
                       Expanded(
                         child: CodeTextField(
                           textEditingController: _secondCodeTextController,
@@ -151,7 +163,7 @@ class _VerifyState extends State<Verify> {
                           },
                         ),
                       ),
-                      const SizedBox(width: 10),
+                       SizedBox(width: 10.w),
                       Expanded(
                         child: CodeTextField(
                           textEditingController: _thirdCodeTextController,
@@ -163,7 +175,7 @@ class _VerifyState extends State<Verify> {
                           },
                         ),
                       ),
-                      const SizedBox(width: 10),
+                       SizedBox(width: 10.w),
                       Expanded(
                         child: CodeTextField(
                           textEditingController: _fourthCodeTextController,
@@ -175,13 +187,27 @@ class _VerifyState extends State<Verify> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 50,),
+                  SizedBox(height: 10.h,),
+                  AppTextField(
+                    hint: 'Password',
+                    controller: _password,
+                    prefixIcon: Icons.lock,
+                    obscureText: true,
+                  ),
+                   SizedBox(height: 10.h),
+                  AppTextField(
+                    hint: 'Password Confirmation',
+                    controller: _confirmPassword,
+                    prefixIcon: Icons.lock,
+                    obscureText: true,
+                  ),
+                   SizedBox(height: 50.h,),
 
 
 
-                  CustomButton(onPress: (){
-                            Navigator.pushNamed(context, '/ChangePassword');
-                  }, text: ' Verify', color: HexColor("#07BFA5")),
+                  CustomButton(onPress: ()async{
+                        await  performResetPassword();
+                  }, text: ' Save Changes', color: HexColor("#07BFA5")),
 
 
 
@@ -191,7 +217,58 @@ class _VerifyState extends State<Verify> {
         ],)),
       ),
     );
+
+
+  }
+  Future<void> performResetPassword() async {
+    if (checkData()) {
+      await resetPassword();
+    }
   }
 
+  bool checkData() {
+    if (checkCode() && checkPassword()) {
+      return true;
+    }
+    return false;
+  }
 
+ bool checkPassword(){
+    if(_password.text.isNotEmpty && _confirmPassword.text.isNotEmpty){
+
+      if(_password.text == _confirmPassword.text){
+        return true;
+      }
+      showSnackBar(context, message: 'Password confirmation error!' , error: true);
+      return false;
+    }
+    showSnackBar(context, message: 'Enter new Password ' , error: true);
+    return false;
+ }
+
+  bool checkCode() {
+    if (_firstCodeTextController.text.isNotEmpty &&
+        _secondCodeTextController.text.isNotEmpty &&
+        _thirdCodeTextController.text.isNotEmpty &&
+        _fourthCodeTextController.text.isNotEmpty) {
+      getVerificationCode();
+      return true;
+    }
+    showSnackBar(
+      context,
+      message: 'Enter verification code',
+      error: true,
+    );
+    return false;
+  }
+  String getVerificationCode() {
+    return _code = _firstCodeTextController.text +
+        _secondCodeTextController.text +
+        _thirdCodeTextController.text +
+        _fourthCodeTextController.text;
+  }
+  Future<void> resetPassword() async {
+    bool status = await AuthApiController().resetPassword(context ,phone:widget.phone , code: _code!, password: _password.text);
+    if (status) Navigator.pop(context);
+  }
 }

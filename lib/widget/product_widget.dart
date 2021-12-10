@@ -28,7 +28,7 @@ class ProductWidget extends StatelessWidget {
                 height: 10.h,
               ),
               Container(
-                height: 50,
+                height: 40.h,
                 child: Row(
                   children: [
                     Expanded(
@@ -38,8 +38,8 @@ class ProductWidget extends StatelessWidget {
                         )),
                     Spacer(),
                     Text(
-                      'Price',
-                      //product.price.toString()+'\$',
+
+                      100.toString()+'\$',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     )
                   ],
@@ -51,15 +51,15 @@ class ProductWidget extends StatelessWidget {
         ),
         Positioned.fill(child: Container(
           margin: EdgeInsets.all(10.0),
-          child: Align(alignment: Alignment.topLeft,
+          child: Align(alignment: AlignmentDirectional.topEnd,
               child: Column(children: [
                 IconButton(
                   onPressed: () {
 
                   },
                   icon: Icon(
-                    Icons.shopping_cart,
-                    color: Colors.purple,
+                    Icons.favorite,
+                    color: Colors.red,
                     size: 30,
                   ),
                 ),

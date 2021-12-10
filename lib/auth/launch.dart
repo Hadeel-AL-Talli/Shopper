@@ -1,15 +1,30 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:shopper_project2/prefs/shared_pref_controller.dart';
 
-class LaunchScreen extends StatelessWidget {
+class LaunchScreen extends StatefulWidget {
   const LaunchScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  State<LaunchScreen> createState() => _LaunchScreenState();
+}
+
+class _LaunchScreenState extends State<LaunchScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushNamed(context, '/Explore_screen');
+     String route = SharedPrefController().loggedIn ? '/main_screen': '/Sign_in';
+     Navigator.pushReplacementNamed(context, route);
+
     });
+
+  }
+  @override
+  Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: HexColor("#01221D"),
       body: Center(
