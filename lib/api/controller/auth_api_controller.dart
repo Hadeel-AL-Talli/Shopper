@@ -6,6 +6,7 @@ import 'package:shopper_project2/api/api_helper.dart';
 import 'package:shopper_project2/api/api_setting.dart';
 import 'package:shopper_project2/models/api_base_response.dart';
 import 'package:shopper_project2/models/base_api_object_response.dart';
+import 'package:shopper_project2/models/register_user.dart';
 
 import 'package:shopper_project2/models/user.dart';
 import 'package:http/http.dart' as http;
@@ -14,19 +15,18 @@ import 'package:shopper_project2/prefs/shared_pref_controller.dart';
 
 class AuthApiController with ApiHelper {
   Future<bool> register(BuildContext context,
-      {required User user}) async {
+      {required RegisterUser user}) async {
     var url = Uri.parse(ApiSetting.register);
     var response = await http.post(url, body: {
       'name': user.name,
-      'mobile':user.mobile,
-       
+      'mobile': user.mobile,
+      'password': user.password,
       'gender': user.gender,
-      'STORE_API_KEY':'1915d427-70db-443b-ab9c-84a467c96887',
-
-     'city_id': user.city
+      'STORE_API_KEY': ApiSetting.storeApiKey,
+      'city_id': user.cityId.toString()
 
     });
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200) {
       var basApiResponse = ApiBaseResponse.fromJson(jsonDecode(response.body));
       showSnackBar(context, message: basApiResponse.message);
       return true;

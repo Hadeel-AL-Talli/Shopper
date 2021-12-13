@@ -16,6 +16,7 @@ class ApiSetting {
   static const faq = _apiUrl +'faqs';
   static const contactRequest = _apiUrl+'contact-requests';
   static const favoriteProducts = _apiUrl +'favorite-products';
+  static const storeApiKey = '1915d427-70db-443b-ab9c-84a467c96887';
 
 
 }

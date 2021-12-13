@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:shopper_project2/api/api_setting.dart';
@@ -21,24 +22,23 @@ class DropDownController extends GetxController{
 
   }
 
-  Future<List<City>> getcities () async{
+   Future<List<City>> getcities () async{
      var url = Uri.parse(ApiSetting.cities);
-     var response =await  http.get(url);
+     var response =await  http.get(url,
+         headers: {
+           HttpHeaders.acceptHeader:'application/json',
+         }
+     );
+     print(response.statusCode.toString());
      if (response.statusCode == 200) {
-       print(response.statusCode.toString());
-       var citiesJsonArray = jsonDecode(response.body)['list'] as List;
 
+       var citiesJsonArray = jsonDecode(response.body)['list'] as List;
        return citiesJsonArray
            .map((jsonObject) => City.fromJson(jsonObject))
            .toList();
-
-
-
-     }else{
-       return [];
      }
-
-  }
+     return [];
+   }
 
 
 }
