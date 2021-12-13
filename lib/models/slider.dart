@@ -1,4 +1,4 @@
-class Slider {
+class SliderModel {
   late int id;
  late  int objectId;
  late String url;
@@ -6,7 +6,7 @@ class Slider {
 
   
 
-  Slider.fromJson(Map<String, dynamic> json) {
+  SliderModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     objectId = json['object_id'];
     url = json['url'];

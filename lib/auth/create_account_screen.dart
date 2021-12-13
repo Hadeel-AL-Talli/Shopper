@@ -6,7 +6,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:shopper_project2/api/api_helper.dart';
 import 'package:shopper_project2/api/controller/auth_api_controller.dart';
 import 'package:shopper_project2/get/drop_down_controller.dart';
-import 'package:shopper_project2/helpers/helpers.dart';
+import 'package:shopper_project2/get/home_getx_controller.dart';
 import 'package:shopper_project2/models/city.dart';
 import 'package:shopper_project2/models/user.dart';
 import 'package:shopper_project2/widget/custom_button.dart';
@@ -23,7 +23,11 @@ class CreateAccount extends StatefulWidget {
 
 class _CreateAccountState extends State<CreateAccount> with ApiHelper {
  DropDownController dropDownController = DropDownController();
- List<City> _cities = <City>[];
+
+  List<City> _cities =   DropDownController().getcities() as List<City>  ;
+
+  String? dropDownValue ;
+
   String _gender = 'M';
   late TextEditingController _phoneTextEditingController;
   late TextEditingController _nameTextEditingController;
@@ -133,7 +137,8 @@ class _CreateAccountState extends State<CreateAccount> with ApiHelper {
                                     height: 16.h,
                                   ),
                                   Obx(()=>
-                                    DropdownButton<String>(
+                                    DropdownButton<dynamic>(
+
                                       isExpanded: true,
                                       elevation: 10,
                                       hint: Text('Select City', style:TextStyle(color:Colors.red)),
@@ -141,21 +146,19 @@ class _CreateAccountState extends State<CreateAccount> with ApiHelper {
                                       onChanged: (newValue){
                                           dropDownController.setSelected(newValue!);
                                       },
-                                      items: [
+                                      items:
 
-                                       // dropDownController.getcities()
-                                       //  DropdownMenuItem(
-                                       //    child: Text("Gaza"),
-                                       //    value: null,
-                                       //  ),
-                                       //  DropdownMenuItem(
-                                       //    child: Text("DerBalaalh"),
-                                       //    value: null,
-                                       //  ),
+                                      _cities.map((e) {
+                                        return DropdownMenuItem(child: Text('${e.nameEn}') , value: e,);
+                                      }).toList(),
 
-                                      ],
+
+
+
+
                                     ),
                                   ),
+
                                   AppTextField(
                                       hint: 'password',
                                       controller: _passwordTextEditingController,

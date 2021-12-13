@@ -19,11 +19,11 @@ class AuthApiController with ApiHelper {
     var response = await http.post(url, body: {
       'name': user.name,
       'mobile':user.mobile,
-      'email': user.email,
-
+       
       'gender': user.gender,
+      'STORE_API_KEY':'1915d427-70db-443b-ab9c-84a467c96887',
 
-     'city': user.city
+     'city_id': user.city
 
     });
     if (response.statusCode == 201) {

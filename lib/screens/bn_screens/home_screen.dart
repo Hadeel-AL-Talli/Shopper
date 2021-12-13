@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shopper_project2/api/controller/home_api_controller.dart';
 import 'package:shopper_project2/get/home_getx_controller.dart';
+import 'package:shopper_project2/models/category.dart';
+import 'package:shopper_project2/models/home_response.dart';
+import 'package:shopper_project2/models/product.dart';
 import 'package:shopper_project2/widget/category_widget.dart';
 import 'package:shopper_project2/widget/product_widget.dart';
 
@@ -16,14 +20,34 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
+  HomeGetxController _homeGetxController = Get.put(HomeGetxController());
+  List<Product> _latestProduct = <Product>[];
+  List<Product> _famousProduct = <Product>[];
+  List<Slider> _slider = <Slider> [];
+  List<Category> _categories = <Category>[];
+  @override
+  void initState() {
+    // TODO: implement initState
 
+    super.initState();
+    _latestProduct = HomeGetxController().getHome() as List<Product>;
+
+  }
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
+      body: GetBuilder<HomeGetxController>(
+
+        builder: (controller)
+    {
+      if (controller.loading) {
+        return Center(child: CircularProgressIndicator(),);
+      }
+      else if (controller.homeResponse != null) {
+        return ListView(
+          physics: BouncingScrollPhysics(),
           children: [
             Stack(
               children: [
@@ -57,19 +81,19 @@ class _HomeState extends State<Home> {
                         width: 500.w,
                         child: CarouselSlider(
                             items: [
-                             // for (var i = 0; i < Slider.image.length; i++)
-                                Container(
-                                  margin: const EdgeInsets.only(top: 20.0, left: 20.0),
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: NetworkImage('image[i]'),
-                                      fit: BoxFit.fitHeight,
-                                    ),
-                                    // border:
-                                    //     Border.all(color: Theme.of(context).accentColor),
-                                    borderRadius: BorderRadius.circular(32.0),
+                         //controller.homeResponse.slider,
+                              Container(
+                                margin: const EdgeInsets.only(
+                                    top: 20.0, left: 20.0),
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(''),
+                                    fit: BoxFit.fitHeight,
                                   ),
+
+                                  borderRadius: BorderRadius.circular(32.0),
                                 ),
+                              ),
                             ],
                             options: CarouselOptions(
                               height: 500.h,
@@ -81,10 +105,10 @@ class _HomeState extends State<Home> {
                               autoPlay: true,
                               autoPlayInterval: Duration(seconds: 3),
                               autoPlayAnimationDuration:
-                                  Duration(milliseconds: 800),
+                              Duration(milliseconds: 800),
                               autoPlayCurve: Curves.fastOutSlowIn,
                               enlargeCenterPage: true,
-                              // onPageChanged: callbackFunction,
+
                               scrollDirection: Axis.horizontal,
                             )))),
               ],
@@ -104,7 +128,9 @@ class _HomeState extends State<Home> {
                         fontFamily: 'Poppins')),
                 Spacer(),
                 IconButton(
-                    onPressed: () {}, icon: Icon(Icons.arrow_forward_ios))
+                    onPressed: () {
+
+                    }, icon: Icon(Icons.arrow_forward_ios))
               ],
             ),
             SingleChildScrollView(
@@ -114,15 +140,9 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   //Category widget
-                  CategoryWidget(),
-                  SizedBox(
-                    width: 20.w,
-                  ),
-                  CategoryWidget(),
-                  SizedBox(
-                    width: 20.w,
-                  ),
-                  CategoryWidget(),
+                  CategoryWidget(name: 'Clothes', imageUrl: '',),
+
+                  //CategoryWidget(),
                 ],
               ),
             ),
@@ -147,12 +167,56 @@ class _HomeState extends State<Home> {
             //Product Widget
             Column(
               children: [
-                ProductWidget(),
-                ProductWidget(),
+
+                ProductWidget(name: 'test', imageUrl: '', price: 100,),
+
+
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    Text('Famous Products ', style: TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Poppins')),
+                    ProductWidget(imageUrl: 'imageUrl', price: 100, name: 'name'),
+                    Spacer(),
+                    IconButton(
+                        onPressed: () {}, icon: Icon(Icons.arrow_forward_ios))
+                  ],
+                ),
+
+
+                Column(
+                    children: [
+                      ProductWidget(
+                          imageUrl: 'imageUrl', price: 30, name: 'ddddddddddd')
+                    ]
+                )
+
+
               ],
             )
           ],
-        ),
+        );
+      } else {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+
+            Icon(Icons.warning, size: 80),
+            Center(child: Text('No Data !', style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 22,
+                fontWeight: FontWeight.bold),)),
+          ],
+        );
+      }
+
+
+        },
+
       ),
     );
   }

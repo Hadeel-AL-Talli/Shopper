@@ -56,7 +56,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
           GestureDetector(
             onTap:(){
-              Navigator.pushNamed(context, '/Favourite');
+              Navigator.pushNamed(context, '/contact_request');
             },
             child: Container(
               decoration: BoxDecoration(

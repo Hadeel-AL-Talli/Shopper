@@ -8,10 +8,12 @@ import 'package:shopper_project2/auth/signin_screen.dart';
 import 'package:shopper_project2/prefs/shared_pref_controller.dart';
 import 'package:shopper_project2/screens/bn_screens/home_screen.dart';
 import 'package:shopper_project2/screens/main_screen.dart';
+import 'package:shopper_project2/screens/product_details.dart';
 import 'package:shopper_project2/screens/profile/faq.dart';
 import 'package:shopper_project2/screens/profile/contact_request.dart';
 import 'package:shopper_project2/screens/profile/personal_info.dart';
 import 'package:shopper_project2/screens/profile/settings.dart';
+import 'package:shopper_project2/screens/sub_category.dart';
 
 
 import 'auth/create_account_screen.dart';
@@ -46,9 +48,10 @@ class MyApp extends StatelessWidget {
           Locale('ar','')
 
         ],
+        locale: const Locale('en'),
         debugShowCheckedModeBanner: false,
        initialRoute: '/launch_screen',
-       // initialRoute: '/main_screen',
+       // initialRoute: '/product_details',
         routes: {
           /*    AUTH SCREENS     */
           '/launch_screen': (context) => LaunchScreen(),
@@ -68,9 +71,13 @@ class MyApp extends StatelessWidget {
           '/personal_info':(context)=> PersonalInfo(),
           '/settings':(context)=> Settings(),
           '/faq':(context)=>FAQ(),
-          '/Favourite':(context)=> ContactRequest()
+          '/contact_request':(context)=> ContactRequest(),
 
 
+          /* Products*/
+
+            '/product_details': (context)=> ProductDetails(),
+          '/sub_category' : (context)=>SubCategory()
 
 
 

@@ -54,7 +54,7 @@ class _FAQState extends State<FAQ> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          '_faq[index].questionEn',
+                          _faq[index].questionAr,
                           style: const TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -62,9 +62,9 @@ class _FAQState extends State<FAQ> {
                         ),
                         const SizedBox(height: 15),
                         Text(
-                          '_faq[index].',
+                          _faq[index].answerEn,
                           style: const TextStyle(
-                            color: Colors.black,
+                            color: Colors.grey,
                             fontWeight: FontWeight.bold,
                           ),
                         )
