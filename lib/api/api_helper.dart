@@ -1,6 +1,7 @@
-
+import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:shopper_project2/prefs/shared_pref_controller.dart';
 
 mixin ApiHelper {
   void showSnackBar(BuildContext context,
@@ -20,8 +21,11 @@ mixin ApiHelper {
       'Accept': 'application/json',
       //'lang': SharedPreferencesController().checkLanguage
     };
-    // if(SharedPreferencesController().isLoggedIn)
-    //   headers['Authorization'] = 'Bearer TOKEN';
-    return headers;
+    if (SharedPrefController().loggedIn) {
+      headers[HttpHeaders.authorizationHeader] = SharedPrefController().token;
+      headers[HttpHeaders.acceptHeader] = 'application/json';
+    }
+    return
+    headers;
   }
 }

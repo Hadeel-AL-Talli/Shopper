@@ -25,6 +25,8 @@ class _PersonalInfoState extends State<PersonalInfo> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: Text('Personal Info' , style:TextStyle(fontFamily: 'Poppins' , fontWeight: FontWeight.bold, fontSize:18 , color: Colors.black)),),
+
+      body: null,
     );
   }
 }

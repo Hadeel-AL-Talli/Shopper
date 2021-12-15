@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shopper_project2/api/controller/home_api_controller.dart';
 import 'package:shopper_project2/models/faq.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class FAQ extends StatefulWidget {
   const FAQ({Key? key}) : super(key: key);
 
@@ -32,7 +32,7 @@ class _FAQState extends State<FAQ> {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: Text('FAQ' , style:TextStyle(fontFamily: 'Poppins' , fontWeight: FontWeight.bold, fontSize:18 , color: Colors.black)),),
+        title: Text('FAQ' , style:TextStyle(fontFamily: 'Poppins' , fontWeight: FontWeight.bold, fontSize:25 , color: Colors.black)),),
 
       body: FutureBuilder<List<FAQL>>(
         future: _future,
@@ -43,10 +43,12 @@ class _FAQState extends State<FAQ> {
           else if(snapshot.hasData && snapshot.data!.isNotEmpty){
             _faq = snapshot.data ??[];
             return ListView.builder(
+              physics: BouncingScrollPhysics(),
+              padding: EdgeInsets.all(20),
                  itemCount: _faq.length,
                 itemBuilder: (context , index){
                   return Card(
-                    elevation: 4,
+                    elevation: 2,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -54,23 +56,27 @@ class _FAQState extends State<FAQ> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          _faq[index].questionAr,
+                          _faq[index].questionEn,
                           style: const TextStyle(
                             color: Colors.black,
+                            fontSize: 18,
+                            fontFamily: 'Poppins',
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 15),
+                         SizedBox(height: 20.h),
                         Text(
                           _faq[index].answerEn,
                           style: const TextStyle(
                             color: Colors.grey,
-                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Poppins'
                           ),
-                        )
+                        ),
+                        SizedBox(height: 20.w,)
                       ],
                     ),
                   );
+
                 });
           }
           else {

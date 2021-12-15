@@ -27,8 +27,10 @@ class AuthApiController with ApiHelper {
 
     });
     if (response.statusCode == 200) {
+      print(jsonDecode(response.body)['code']);
       var basApiResponse = ApiBaseResponse.fromJson(jsonDecode(response.body));
       showSnackBar(context, message: basApiResponse.message);
+
       return true;
     } else if (response.statusCode == 400) {
       var message = jsonDecode(response.body)['message'];
@@ -50,6 +52,7 @@ class AuthApiController with ApiHelper {
     if (response.statusCode == 200) {
       //TODO: SHARED PREFERENCES - SAVE LOGGED IN USER DATA!!
       var baseApiResponse = BaseApiObjectResponse<User>.fromJson(jsonDecode(response.body));
+      print(jsonDecode(response.body)['code']);
 
       showSnackBar(
         context,
@@ -68,8 +71,36 @@ class AuthApiController with ApiHelper {
     }
     return false;
   }
+// activate account
+  Future<bool> activate(BuildContext context,
+      {required String phone , required String code}) async {
+    var url = Uri.parse(ApiSetting.activate);
+    var response = await http.post(url, body: {
+      'mobile': phone,
+      'code':code
+    });
 
-//logout
+    if (response.statusCode == 200) {
+
+      return true;
+    } else if (response.statusCode == 400) {
+      showSnackBar(
+
+        context,
+        message: jsonDecode(response.body)['message'],
+        error: true,
+      );
+    } else {
+      showSnackBar(
+        context,
+        message: 'Something went wrong, please try again!',
+        error: true,
+      );
+    }
+    return false;
+  }
+
+
 
   Future<bool> forgetPassword(BuildContext context,
       {required String phone}) async {

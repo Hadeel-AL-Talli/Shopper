@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shopper_project2/api/api_helper.dart';
 import 'package:shopper_project2/api/controller/auth_api_controller.dart';
+import 'package:shopper_project2/auth/verify_code.dart';
 import 'package:shopper_project2/get/drop_down_controller.dart';
 import 'package:shopper_project2/helpers/helpers.dart';
 import 'package:shopper_project2/models/city.dart';
@@ -279,7 +282,17 @@ class _CreateAccountState extends State<CreateAccount> with ApiHelper {
 
   Future<void> register() async {
     bool status = await AuthApiController().register(context, user: user);
-    if (status) Navigator.pop(context);
+
+    if (status){ Navigator.push(
+        context,
+        MaterialPageRoute(
+        builder: (context) =>
+        VerifyCode(phone: _phoneTextEditingController.text),
+
+
+    ),
+    );
+  }
   }
 
   RegisterUser get user {

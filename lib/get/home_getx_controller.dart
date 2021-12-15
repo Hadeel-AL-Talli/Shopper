@@ -10,6 +10,7 @@ class HomeGetxController extends GetxController{
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    getHome();
   }
 
   Future<void> getHome() async {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shopper_project2/api/api_helper.dart';
 import 'package:shopper_project2/api/controller/auth_api_controller.dart';
+import 'package:shopper_project2/auth/verify_code.dart';
 import 'package:shopper_project2/helpers/helpers.dart';
 import 'package:shopper_project2/widget/custom_button.dart';
 import 'package:shopper_project2/widget/custom_text_feild.dart';
@@ -157,13 +158,15 @@ class _SignInState extends State<SignIn> with ApiHelper{
                                 style: TextStyle(
                                     color: HexColor("#07BFA5"),
                                     fontWeight: FontWeight.bold),
-                              )
+                              ),
+
                             ],
                           ),
                         ),
                       ],
                     ),
                   ),
+
                 ),
               ],
             ),

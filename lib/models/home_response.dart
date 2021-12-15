@@ -3,7 +3,7 @@ import 'package:shopper_project2/models/category.dart';
 import 'package:shopper_project2/models/product.dart';
 import 'package:shopper_project2/models/slider.dart';
 
-class HomeResponse extends ApiBaseResponse {
+class HomeResponse  {
  late List<SliderModel> slider;
 late  List<Category> categories;
  late List<Product> latestProducts;
@@ -11,7 +11,7 @@ late  List<Category> categories;
 
 
 
- HomeResponse.fromJson(Map<String, dynamic> json): super.fromJson(json) {
+ HomeResponse.fromJson(Map<String, dynamic> json) {
     if (json['slider'] != null) {
       slider =  <SliderModel>[];
       json['slider'].forEach((v) {
