@@ -26,8 +26,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
              child: Text('My Account ' , style:TextStyle(fontSize: 22.sp, color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'Poppins')),
 
 
-           ),
 
+           ),
         Expanded(
           child:  GridView(
 

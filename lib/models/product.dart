@@ -12,7 +12,7 @@ class Product {
   late int overalRate;
   late int subCategoryId;
   late int productRate;
-  late int? offerPrice;
+  late Null offerPrice;
   late bool isFavorite;
   late String imageUrl;
 

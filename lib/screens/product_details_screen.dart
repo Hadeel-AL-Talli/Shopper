@@ -38,7 +38,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: const Icon(Icons.arrow_back_ios),
           color: Colors.black,
         ),
@@ -112,8 +114,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               fontWeight: FontWeight.w700)),
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
+                  const Padding(
+                    padding:  EdgeInsets.all(15.0),
                     child: Text(
                       ' Product info:',
                       style: TextStyle(

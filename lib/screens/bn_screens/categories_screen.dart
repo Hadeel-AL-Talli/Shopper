@@ -28,6 +28,15 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(onPressed: (){
+          Navigator.pop(context);
+        },icon: Icon(Icons.arrow_back_ios,color: Colors.black,)),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text('Categories', style: TextStyle(color: Colors.black , fontFamily: 'Poppins'), ),
+      ),
+
       body: FutureBuilder<List<Category>>(
         future: _future,
         builder: (context, snapshot) {

@@ -52,6 +52,9 @@ class AuthApiController with ApiHelper {
     if (response.statusCode == 200) {
       //TODO: SHARED PREFERENCES - SAVE LOGGED IN USER DATA!!
       var baseApiResponse = BaseApiObjectResponse<User>.fromJson(jsonDecode(response.body));
+      // Future.delayed(Duration(seconds: 3),(){
+      //   showSnackBar(context, message: jsonDecode(response.body)['code']);
+      // });
       print(jsonDecode(response.body)['code']);
 
       showSnackBar(
@@ -78,7 +81,10 @@ class AuthApiController with ApiHelper {
     var response = await http.post(url, body: {
       'mobile': phone,
       'code':code
-    });
+    },
+      headers: headers
+    );
+    print('CODE: ${jsonDecode(response.body)['code']}');
 
     if (response.statusCode == 200) {
 

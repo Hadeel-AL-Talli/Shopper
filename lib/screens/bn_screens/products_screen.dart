@@ -61,7 +61,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    //navigate to sub category
+
                     Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailsScreen(product: _products[index])));
                   },
                   child: Card(

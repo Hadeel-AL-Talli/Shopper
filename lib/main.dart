@@ -9,6 +9,7 @@ import 'package:shopper_project2/prefs/shared_pref_controller.dart';
 import 'package:shopper_project2/screens/bn_screens/home_screen.dart';
 import 'package:shopper_project2/screens/main_screen.dart';
 import 'package:shopper_project2/screens/product_details_screen.dart';
+import 'package:shopper_project2/screens/profile/change_password_screen.dart';
 import 'package:shopper_project2/screens/profile/faq.dart';
 import 'package:shopper_project2/screens/profile/contact_request.dart';
 import 'package:shopper_project2/screens/profile/personal_info.dart';
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
         locale: const Locale('en'),
         debugShowCheckedModeBanner: false,
         initialRoute: '/launch_screen',
-        //initialRoute: '/verify_code',
+      // initialRoute: '/OnBoarding',
         routes: {
           /*    AUTH SCREENS     */
           '/launch_screen': (context) => LaunchScreen(),
@@ -54,7 +55,10 @@ class MyApp extends StatelessWidget {
           '/Sign_in': (context) => SignIn(),
           '/create_account': (context) => CreateAccount(),
           '/forget_password': (context) => ForgetPassword(),
-          //'/verify_code'  :(context)=> VerifyCode(),
+         // '/verify_code'  :(context)=> VerifyCode(),
+
+          '/change-password':(context)=>ChangePasswordScreen(),
+
 
           '/home_screen': (context) => Home(),
           '/main_screen': (context) => MainScreen(),

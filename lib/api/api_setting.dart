@@ -10,6 +10,8 @@ class ApiSetting {
   static const forgetPassword = _apiUrl + 'auth/forget-password';
 
   static const resetPassword = _apiUrl+ 'auth/reset-password';
+  static const updateProfile = _apiUrl+'auth/update-profile';
+  static const changePassword = _apiUrl + 'auth/change-password';
   static const categories = _apiUrl + 'categories';
 
 
@@ -23,6 +25,7 @@ class ApiSetting {
 
   static const faq = _apiUrl +'faqs';
   static const contactRequest = _apiUrl+'contact-requests';
+
 
   static const favoriteProducts = _apiUrl +'favorite-products';
   static const storeApiKey = '1915d427-70db-443b-ab9c-84a467c96887';

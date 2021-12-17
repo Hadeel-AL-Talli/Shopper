@@ -244,7 +244,12 @@ class _CreateAccountState extends State<CreateAccount> with ApiHelper {
                           },
                         ),
                         CustomButton(
-                            onPress: () async => await performRegister(),
+                            onPress: () async {
+
+                              await performRegister();
+
+
+                            },
                             text: 'Register',
                             color: HexColor("#07BFA5")),
                       ],
@@ -259,9 +264,12 @@ class _CreateAccountState extends State<CreateAccount> with ApiHelper {
   }
 
   Future<void> performRegister() async {
+
     if (checkData()) {
+
       await register();
     }
+
   }
 
   bool checkData() {

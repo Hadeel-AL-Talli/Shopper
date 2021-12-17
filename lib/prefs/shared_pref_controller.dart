@@ -1,5 +1,6 @@
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shopper_project2/models/city.dart';
 import 'package:shopper_project2/models/user.dart';
 
 enum PrefKeys { loggedIn, name, id, gender, mobile, cityEn,cityAr,language,token }
@@ -33,12 +34,30 @@ class SharedPrefController {
     await _sharedPreferences.setString(
         PrefKeys.token.toString(), 'Bearer ' + user.token);
   }
+  Future<void> updateProfile ({required String name,required String gender,required City city  }) async {
+    await _sharedPreferences.setString(PrefKeys.cityAr.toString(),city.nameAr);
+    await _sharedPreferences.setString(PrefKeys.cityEn.toString(),city.nameEn);
+    await _sharedPreferences.setString(PrefKeys.name.toString(),name);
+    await _sharedPreferences.setString(PrefKeys.gender.toString(), gender);
+  }
 
   bool get loggedIn =>
       _sharedPreferences.getBool(PrefKeys.loggedIn.toString()) ?? false;
 
   String get token =>
       _sharedPreferences.getString(PrefKeys.token.toString()) ?? '';
+
+  String get name =>
+      _sharedPreferences.getString(PrefKeys.name.toString())??'';
+
+  String get mobile =>
+      _sharedPreferences.getString(PrefKeys.mobile.toString())??'';
+
+  String get gender =>
+      _sharedPreferences.getString(PrefKeys.gender.toString())??'';
+
+  String get city  =>
+      _sharedPreferences.getString(PrefKeys.cityAr.toString())??'';
 
   Future<bool> clear() async {
     return await _sharedPreferences.clear();
