@@ -17,6 +17,7 @@ import 'package:shopper_project2/widget/custom_button.dart';
 import 'package:shopper_project2/widget/custom_text_feild.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopper_project2/models/user.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount({Key? key}) : super(key: key);
@@ -113,7 +114,8 @@ class _CreateAccountState extends State<CreateAccount> with ApiHelper {
                           height: 20.h,
                         ),
                         Text(
-                          'Register ',
+                          'AppLocalizations.of(context)!.',
+                           // AppLocalizations.of(context)!.register,
                           style: TextStyle(
                               fontSize: 22.sp,
                               fontWeight: FontWeight.bold,
@@ -291,15 +293,17 @@ class _CreateAccountState extends State<CreateAccount> with ApiHelper {
   Future<void> register() async {
     bool status = await AuthApiController().register(context, user: user);
 
-    if (status){ Navigator.push(
+    if (status){
+      Navigator.push(
         context,
         MaterialPageRoute(
-        builder: (context) =>
-        VerifyCode(phone: _phoneTextEditingController.text),
+          builder: (context) =>
+              VerifyCode(phone: _phoneTextEditingController.text),
 
 
-    ),
-    );
+        ),
+      );
+     // Navigator.pushNamed(context, '/Sign_in');
   }
   }
 

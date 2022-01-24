@@ -1,4 +1,7 @@
 {
-"skip":"تخطي",
-"register":"إنشاء حساب "
+  "home": "الرئيسية",
+  "categories" : "التصنيفات",
+  "latestProduct": "أحدث المنتجات ",
+  "famousProduct": "الأكثر شهرة "
+
 }

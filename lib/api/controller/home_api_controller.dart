@@ -54,6 +54,7 @@ class HomeApiController with ApiHelper {
 
   Future<List<Product>> getProducts(String id) async {
     var url = Uri.parse(ApiSetting.products.replaceFirst("{id}", id));
+    print(url);
     var response = await http.get(url, headers: headers);
     if (response.statusCode == 200) {
       var productsJsonArray = jsonDecode(response.body)['list'] as List;
@@ -67,6 +68,7 @@ class HomeApiController with ApiHelper {
 
   Future<Product?> getProductDetails(String id) async {
     var url = Uri.parse(ApiSetting.productDetails.replaceFirst("{id}", id));
+    print(url);
     var response = await http.get(url, headers: headers);
     print(response.statusCode);
     if (response.statusCode == 200) {

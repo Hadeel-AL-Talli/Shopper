@@ -25,7 +25,7 @@ mixin ApiHelper {
       headers[HttpHeaders.authorizationHeader] = SharedPrefController().token;
       headers[HttpHeaders.acceptHeader] = 'application/json';
     }
-    return
-    headers;
+    return headers;
+
   }
 }

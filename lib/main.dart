@@ -22,15 +22,18 @@ import 'auth/launch.dart';
 import 'auth/welcome.dart';
 import 'package:get/get.dart';
 
+import 'get/langgexcontroller.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefController().initPref();
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+   MyApp({Key? key}) : super(key: key);
+  final LanguageGetxController _languageGetxController =
+  Get.put<LanguageGetxController>(LanguageGetxController());
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -42,7 +45,7 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
         ],
         supportedLocales: const [Locale('en', ''), Locale('ar', '')],
-        locale: const Locale('en'),
+        locale: Locale(LanguageGetxController.to.language.value),
         debugShowCheckedModeBanner: false,
         initialRoute: '/launch_screen',
       // initialRoute: '/OnBoarding',
@@ -56,20 +59,14 @@ class MyApp extends StatelessWidget {
           '/create_account': (context) => CreateAccount(),
           '/forget_password': (context) => ForgetPassword(),
          // '/verify_code'  :(context)=> VerifyCode(),
-
           '/change-password':(context)=>ChangePasswordScreen(),
-
-
           '/home_screen': (context) => Home(),
           '/main_screen': (context) => MainScreen(),
-
           /*  Profile screens*/
-
           '/personal_info': (context) => PersonalInfo(),
           '/settings': (context) => Settings(),
           '/faq': (context) => FAQ(),
           '/contact_request': (context) => ContactRequest(),
-
           /* Products*/
           // '/product_details': (context) => ProductDetailsScreen(),
         },

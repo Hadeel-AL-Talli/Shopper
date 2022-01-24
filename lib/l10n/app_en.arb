@@ -1,4 +1,7 @@
 {
-"skip":"skip",
-"register":"register"
+  "home": "Home",
+  "categories" : "Categories",
+  "latestProduct": "Latest Product",
+  "famousProduct": "Famous Product"
+
 }

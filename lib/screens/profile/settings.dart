@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopper_project2/api/controller/auth_api_controller.dart';
+import 'package:shopper_project2/get/langgexcontroller.dart';
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
 
@@ -82,7 +83,9 @@ class _SettingsState extends State<Settings> {
                 children: [
                   Icon(Icons.language),
                   Text('Lanunages',style: TextStyle(fontFamily: 'Poppins' , fontWeight: FontWeight.w500 , fontSize:18), ),
-                  IconButton(onPressed: (){}, icon: Icon(Icons.arrow_forward_ios))
+                  IconButton(onPressed: (){
+                    LanguageGetxController.to.changeLanguage();
+                  }, icon: Icon(Icons.arrow_forward_ios))
                 ],
               ),
             ),

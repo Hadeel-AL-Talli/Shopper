@@ -25,7 +25,7 @@ class AuthApiController with ApiHelper {
       'STORE_API_KEY': ApiSetting.storeApiKey,
       'city_id': user.cityId.toString()
 
-    });
+    }, headers: headers);
     if (response.statusCode == 200) {
       print(jsonDecode(response.body)['code']);
       var basApiResponse = ApiBaseResponse.fromJson(jsonDecode(response.body));

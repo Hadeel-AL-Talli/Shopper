@@ -75,7 +75,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                         CircleAvatar(
                           radius: 55,
                           backgroundImage:
-                              NetworkImage(_products[index].imageUrl),
+                          NetworkImage(_products[index].imageUrl),
                         ),
                         const SizedBox(height: 20),
                         Text(

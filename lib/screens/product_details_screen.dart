@@ -7,8 +7,8 @@ import 'package:shopper_project2/models/product.dart';
 import 'package:shopper_project2/widget/custom_button.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({Key? key, required this.product})
-      : super(key: key);
+  const ProductDetailsScreen({required this.product});
+
 
   final Product product;
 
@@ -77,7 +77,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child:
-                              Image.network(snapshot.data!.images[1].imageUrl),
+                          Image.network(snapshot.data!.images[1].imageUrl),
                         ),
                         SizedBox(
                           width: 10.w,
@@ -89,7 +89,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child:
-                              Image.network(snapshot.data!.images[2].imageUrl),
+                          Image.network(snapshot.data!.images[2].imageUrl),
                         ),
                       ],
                     ),
@@ -135,7 +135,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   Align(
                       alignment: AlignmentDirectional.topEnd,
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+
+                        },
                         icon: Icon(Icons.favorite),
                         iconSize: 40,
                         color: Colors.red,

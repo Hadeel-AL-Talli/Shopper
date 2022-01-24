@@ -9,6 +9,7 @@ import 'package:shopper_project2/helpers/helpers.dart';
 import 'package:shopper_project2/widget/custom_button.dart';
 import 'package:shopper_project2/widget/custom_text_feild.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
 
@@ -95,7 +96,7 @@ class _SignInState extends State<SignIn> with ApiHelper{
                           height: 20.h,
                         ),
                          Text(
-                          'Sign In ',
+                           'Sign in',
                           style: TextStyle(
                               fontSize: 22.sp,
                               fontWeight: FontWeight.bold,

@@ -59,7 +59,18 @@ class SharedPrefController {
   String get city  =>
       _sharedPreferences.getString(PrefKeys.cityAr.toString())??'';
 
+
+
   Future<bool> clear() async {
     return await _sharedPreferences.clear();
   }
+
+
+  Future<void> setLanguage({required String lang}) async {
+    await _sharedPreferences.setString(PrefKeys.language.toString(), lang);
+  }
+
+  String get language => _sharedPreferences.getString(PrefKeys.language.toString()) ?? 'en';
 }
+
+
