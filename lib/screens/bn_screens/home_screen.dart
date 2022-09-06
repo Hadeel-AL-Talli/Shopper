@@ -61,7 +61,7 @@ class _HomeState extends State<Home> {
                 Column(
                   children: [
                     Text(
-                      'AppLocalizations.of(context)!.home',
+                     ' AppLocalizations.of(context)!.home',
                       style: TextStyle(
                           fontSize: 22.sp,
                           fontWeight: FontWeight.bold,
@@ -117,7 +117,7 @@ class _HomeState extends State<Home> {
                       width: 10.w,
                     ),
                     Text(
-                      'Categories',
+                      'AppLocalizations.of(context)!.categories',
                       style: TextStyle(
                           fontSize: 20.sp,
                           fontWeight: FontWeight.bold,
@@ -183,7 +183,7 @@ class _HomeState extends State<Home> {
                                 child: Text(
                                   controller
                                       .homeResponse!.categories[index].nameEn,
-                                  style: TextStyle(
+                                  style:const TextStyle(
                                       color: Colors.white,
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold),
@@ -200,13 +200,13 @@ class _HomeState extends State<Home> {
                   height: 20.h,
                 ),
                 Text(
-                  '     Latest Products ',
+                  'AppLocalizations.of(context)!.latestProduct',
                   style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Poppins'),
                 ),
-                SizedBox(
+               const SizedBox(
                   height:10,
                 ),
 
@@ -290,7 +290,7 @@ class _HomeState extends State<Home> {
                   width: 10.w,
                 ),
                 Text(
-                  '     Famous Products ',
+                  'AppLocalizations.of(context)!.famousProduct',
                   style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
@@ -304,7 +304,7 @@ class _HomeState extends State<Home> {
                     //itemCount: controller.homeResponse!.categories.length,
                     itemBuilder: (context, index) {
                       return Padding(
-                        padding: EdgeInsets.only(right: 15),
+                        padding:const EdgeInsets.only(right: 15),
                         child: Container(
                           clipBehavior: Clip.antiAlias,
                           decoration: BoxDecoration(

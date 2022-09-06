@@ -18,7 +18,7 @@ class ForgetPassword extends StatefulWidget {
 
 class _ForgetPasswordState extends State<ForgetPassword> with ApiHelper {
   late TextEditingController _phoneTextEditingController;
-  String? _code;
+ // String? _code;
 
   @override
   void initState() {
